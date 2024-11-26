@@ -1,6 +1,7 @@
 package com.andre.projetolpoo.Controllers;
 
 import com.andre.projetolpoo.Logical.TxTOperations;
+import com.andre.projetolpoo.Models.Consulta;
 import com.andre.projetolpoo.Models.Medico;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,39 +21,39 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class MedicoScreen implements Initializable {
+public class ConsultaScreen implements Initializable {
 
     @FXML
-    private TableColumn<Medico, String> colunaCPF;
+    private Button agendarConsultaButton;
 
     @FXML
-    private TableColumn<Medico, String> colunaCRM;
+    private TableColumn<Consulta, String>colunaClinica;
 
     @FXML
-    private TableColumn<Medico, String> colunaEspecialidade;
+    private TableColumn<Consulta, String> colunaData;
 
     @FXML
-    private TableColumn<Medico, String> colunaNome;
+    private TableColumn<Consulta, String> colunaHora;
 
     @FXML
-    private TableColumn<Medico, String> colunaTelefone;
+    private TableColumn<Consulta, String> colunaMedico;
 
     @FXML
-    private Button novoMedicoButton;
+    private TableColumn<Consulta, String> colunaPaciente;
 
     @FXML
     private Button recarregarLista;
 
     @FXML
-    private TableView<Medico> tabelaMedicos;
+    private TableView<Consulta> tabelaConsultas;
 
     @FXML
-    void novoMedico(ActionEvent event) {
+    void agendarConsulta(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/cadastrarMedico.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/marcarConsulta.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             Stage stage = new Stage();
-            stage.setTitle("Cadastrar Médico");
+            stage.setTitle("Marcar Consulta");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -68,28 +69,26 @@ public class MedicoScreen implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Configurar as colunas da tabela
-        colunaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colunaCPF.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        colunaTelefone.setCellValueFactory(new PropertyValueFactory<>("telefone"));
-        colunaCRM.setCellValueFactory(new PropertyValueFactory<>("crm"));
-        colunaEspecialidade.setCellValueFactory(new PropertyValueFactory<>("especialidade"));
-
+        colunaPaciente.setCellValueFactory(new PropertyValueFactory<>("paciente"));
+        colunaMedico.setCellValueFactory(new PropertyValueFactory<>("medico"));
+        colunaClinica.setCellValueFactory(new PropertyValueFactory<>("clinica"));
+        colunaData.setCellValueFactory(new PropertyValueFactory<>("data"));
+        colunaHora.setCellValueFactory(new PropertyValueFactory<>("hora"));
         // Preencher a tabela com os dados
         carregarDadosNaTabela();
-
     }
 
     private void carregarDadosNaTabela() {
         // Caminho do arquivo (modifique conforme necessário)
-        String filePath = "src/main/resources/com/andre/projetolpoo/Data/Medicos.txt";
+        String filePath = "src/main/resources/com/andre/projetolpoo/Data/Consultas.txt";
 
         // Carregar os dados do arquivo
-        List<Medico> listaMedicos = TxTOperations.lerTxtMedicos(filePath);
+        List<Consulta> listaConsulta = TxTOperations.lerTxtConsultas(filePath);
 
         // Converter para ObservableList
-        ObservableList<Medico> observableList = FXCollections.observableArrayList(listaMedicos);
+        ObservableList<Consulta> observableList = FXCollections.observableArrayList(listaConsulta);
 
         // Adicionar os dados à TableView
-        tabelaMedicos.setItems(observableList);
+        tabelaConsultas.setItems(observableList);
     }
 }

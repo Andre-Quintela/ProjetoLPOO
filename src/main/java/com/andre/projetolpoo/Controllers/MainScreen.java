@@ -16,7 +16,7 @@ public class MainScreen {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/clinicaScreen.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             Stage stage = new Stage();
-            stage.setTitle("Hello!");
+            stage.setTitle("Clinicas");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -26,8 +26,16 @@ public class MainScreen {
 
     @FXML
     void consultas(ActionEvent event) {
-
-
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/consultaScreen.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
+            Stage stage = new Stage();
+            stage.setTitle("Consultas");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -36,7 +44,7 @@ public class MainScreen {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/medicoScreen.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             Stage stage = new Stage();
-            stage.setTitle("Hello!");
+            stage.setTitle("Medicos");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -51,7 +59,7 @@ public class MainScreen {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/pacienteScreen.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             Stage stage = new Stage();
-            stage.setTitle("Hello!");
+            stage.setTitle("Pacientes");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

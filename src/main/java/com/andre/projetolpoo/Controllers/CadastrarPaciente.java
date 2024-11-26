@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class CadastrarPaciente {
@@ -36,14 +37,23 @@ public class CadastrarPaciente {
     private TextField tipoSanguinioField;
 
     @FXML
+    private Label errorLabel;
+
+    @FXML
     void cadastrarPaciente(ActionEvent event) {
-        if(TxTOperations.buscarPacientePorCPF(filePath, cpfField.getText()) == null){
-            Paciente paciente = new Paciente(nomeField.getText(), cpfField.getText(), telefoneField.getText(), alergiasField.getText(), convenioField.getText(), observacoesField.getText(), tipoSanguinioField.getText());
-            TxTOperations.salvarTxt(paciente.toString(), filePath);
-            ((Stage) cadastrarPacienteButton.getScene().getWindow()).close();
-        }else {
-            System.out.println("Paciente já cadastrado");
+        if(nomeField.getText().isEmpty() || cpfField.getText().isEmpty() || telefoneField.getText().isEmpty() || alergiasField.getText().isEmpty() || convenioField.getText().isEmpty() || observacoesField.getText().isEmpty() || tipoSanguinioField.getText().isEmpty()){
+            errorLabel.setText("Preencha todos os campos");
+            return;
         }
+
+        if(TxTOperations.buscarPacientePorCpf(filePath, cpfField.getText()) != null){
+            errorLabel.setText("Paciente já cadastrado");
+            return;
+        }
+
+        Paciente paciente = new Paciente(nomeField.getText(), cpfField.getText(), telefoneField.getText(), alergiasField.getText(), convenioField.getText(), observacoesField.getText(), tipoSanguinioField.getText());
+        TxTOperations.salvarTxt(paciente.toString(), filePath);
+        ((Stage) cadastrarPacienteButton.getScene().getWindow()).close();
     }
 
 }

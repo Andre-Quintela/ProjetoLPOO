@@ -59,7 +59,7 @@ public class PacienteScreen implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/andre/projetolpoo/Views/cadastrarPaciente.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
             Stage stage = new Stage();
-            stage.setTitle("Hello!");
+            stage.setTitle("Cadastrar Paciente");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
